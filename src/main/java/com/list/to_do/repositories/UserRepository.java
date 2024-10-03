@@ -18,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("SELECT e FROM User e WHERE e.id = :id AND e.deletedAt IS NULL")
     Optional<User> findActiveById(@Param("id") UUID id);
 
+    @Query("SELECT e FROM User e WHERE e.email = :email e.deletedAt IS NULL")
+    Optional<User> findActiveByEmail(@Param("email") String email);
 }
