@@ -2,6 +2,7 @@ package com.list.to_do.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -102,4 +103,11 @@ public class Task implements Serializable {
         this.user = user;
     }
 
+    public boolean getExpirate() {
+        Instant now = Instant.now();
+
+        if (this.validityTime.isAfter(now))
+            return true;
+        return false;
+    }
 }

@@ -127,10 +127,6 @@ public class User implements UserDetails {
         return task;
     }
 
-    public void setTask(List<Task> task) {
-        this.task = task;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (role == UserRole.ADMIN) {
