@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.list.to_do.entities.User;
 
@@ -20,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query("SELECT e FROM User e WHERE e.email = :email e.deletedAt IS NULL")
     Optional<User> findActiveByEmail(@Param("email") String email);
+
+    UserDetails findByLogin(String email);
 }

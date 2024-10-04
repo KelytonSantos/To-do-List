@@ -1,12 +1,18 @@
 package com.list.to_do.entities;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.list.to_do.entities.ENUM.UserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +24,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable {
+public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -44,14 +50,18 @@ public class User implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "America/Sao_Paulo")
     private Instant deletedAt;
 
+    private UserRole role;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Task> task = new ArrayList<>();
 
-    public User(String name, String email, String password, Instant createdAt) {
+    public User(String name, String email, String password, Instant createdAt, UserRole role) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
+        this.role = role;
     }
 
     public User() {
@@ -103,5 +113,35 @@ public class User implements Serializable {
 
     public void setDeletedAt(Instant deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public List<Task> getTask() {
+        return task;
+    }
+
+    public void setTask(List<Task> task) {
+        this.task = task;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == UserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 }

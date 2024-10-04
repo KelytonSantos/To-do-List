@@ -3,9 +3,7 @@ package com.list.to_do.entities.pk;
 import java.io.Serializable;
 
 import jakarta.persistence.Embeddable;
-import lombok.Data;
 
-@Data
 @Embeddable
 public class TaskSharedKey implements Serializable {
 
