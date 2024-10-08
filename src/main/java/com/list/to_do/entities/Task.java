@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.list.to_do.entities.ENUM.PriorityTask;
 
 import jakarta.persistence.Column;
@@ -31,7 +32,7 @@ public class Task implements Serializable {
     @Column(nullable = false, updatable = true)
     private String taskName;
 
-    @Column(nullable = false, updatable = true)
+    @Column(columnDefinition = "TEXT", nullable = false, updatable = true)
     private String taskDescription;
 
     @Column(name = "Validity_Time", nullable = true)
@@ -41,6 +42,7 @@ public class Task implements Serializable {
     @Column(name = "Priority_Task", nullable = false)
     private PriorityTask priorityTask;
 
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
@@ -107,7 +109,7 @@ public class Task implements Serializable {
         Instant now = Instant.now();
 
         if (this.validityTime.isAfter(now))
-            return true;
-        return false;
+            return false;
+        return true;
     }
 }
