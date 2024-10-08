@@ -16,7 +16,7 @@ import com.list.to_do.entities.User;
 @Service
 public class TokenService {
 
-    @Value("${api.securitytoke.service}")
+    @Value("${api.security.token.secret}")
     private String secret;
 
     public String generateToken(User user) {
@@ -24,7 +24,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
-                    .withSubject(user.getEmail())
+                    .withSubject(user.getLogin())
                     .withExpiresAt(generationExpirationDate())
                     .sign(algorithm);
             return token;

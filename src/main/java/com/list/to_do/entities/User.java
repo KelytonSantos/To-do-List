@@ -37,7 +37,7 @@ public class User implements UserDetails {
     private String name;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String login;
 
     @Column(nullable = false)
     private String password;
@@ -56,9 +56,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Task> task = new ArrayList<>();
 
-    public User(String name, String email, String password, Instant createdAt, UserRole role) {
+    public User(String name, String login, String password, Instant createdAt, UserRole role) {
         this.name = name;
-        this.email = email;
+        this.login = login;
         this.password = password;
         this.createdAt = createdAt;
         this.role = role;
@@ -83,12 +83,12 @@ public class User implements UserDetails {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -138,6 +138,6 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.email;
+        return this.login;
     }
 }
