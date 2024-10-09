@@ -17,8 +17,8 @@ import com.list.to_do.DTO.AuthenticationDTO;
 import com.list.to_do.DTO.LoginResponseDTO;
 import com.list.to_do.DTO.RegisterDto;
 import com.list.to_do.entities.User;
-import com.list.to_do.jwt.service.TokenService;
 import com.list.to_do.repositories.UserRepository;
+import com.list.to_do.security.service.TokenService;
 
 @RestController
 @RequestMapping("/auth")

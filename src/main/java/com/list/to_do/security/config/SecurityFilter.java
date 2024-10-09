@@ -1,4 +1,4 @@
-package com.list.to_do.jwt.config;
+package com.list.to_do.security.config;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.list.to_do.jwt.service.TokenService;
 import com.list.to_do.repositories.UserRepository;
+import com.list.to_do.security.service.TokenService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

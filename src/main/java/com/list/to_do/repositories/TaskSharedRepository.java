@@ -18,6 +18,6 @@ public interface TaskSharedRepository extends JpaRepository<TaskShared, UUID> {
     boolean existsByTaskAndUser(@Param("taskId") UUID taskId, @Param("userId") UUID userId);
 
     @Query("SELECT e FROM TaskShared e WHERE e.user.id = :id")
-    Optional<TaskShared> findUserById(@Param UUID id)
+    Optional<TaskShared> findUserById(@Param("id") UUID id);
 
 }

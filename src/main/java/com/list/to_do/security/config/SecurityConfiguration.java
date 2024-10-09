@@ -1,4 +1,4 @@
-package com.list.to_do.jwt.config;
+package com.list.to_do.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
