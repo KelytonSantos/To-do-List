@@ -47,5 +47,4 @@ public class TaskController {
         taskService.deleteTask(taskId);
         return ResponseEntity.ok().build();
     }
-
 }

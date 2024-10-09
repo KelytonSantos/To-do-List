@@ -1,5 +1,6 @@
 package com.list.to_do.repositories;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,8 @@ public interface TaskSharedRepository extends JpaRepository<TaskShared, UUID> {
     // caso eu passe o id da task e user e tiver algo na tabela com essa relação,
     // ele conta 1 retornando true
     boolean existsByTaskAndUser(@Param("taskId") UUID taskId, @Param("userId") UUID userId);
+
+    @Query("SELECT e FROM TaskShared e WHERE e.user.id = :id")
+    Optional<TaskShared> findUserById(@Param UUID id)
 
 }

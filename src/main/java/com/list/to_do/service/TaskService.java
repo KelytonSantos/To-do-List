@@ -27,8 +27,6 @@ public class TaskService {
 
         User user = (User) authentication.getPrincipal();
 
-        System.out.println(user.toString());
-
         return taskRepository.findAllById(user.getId());
     }
 

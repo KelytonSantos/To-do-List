@@ -33,4 +33,15 @@ public class ResourceExceptionHandler {
 
         return ResponseEntity.status(statusCode).body(buildingError);
     }
+
+    @ExceptionHandler(ResourceNotAllowed.class)
+    public ResponseEntity<StandardError> methodNotAllowed(ResourceNotAllowed e, HttpServletRequest request) {
+        String error = "Method Not Allowed";
+        HttpStatus statusCode = HttpStatus.METHOD_NOT_ALLOWED;
+
+        StandardError buildingError = new StandardError(Instant.now(), statusCode.value(), error, e.getMessage(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(statusCode).body(buildingError);
+    }
 }

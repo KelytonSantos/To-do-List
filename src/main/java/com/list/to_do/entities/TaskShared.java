@@ -1,5 +1,6 @@
 package com.list.to_do.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.list.to_do.entities.ENUM.AccessLevel;
 
 import jakarta.persistence.Entity;
@@ -27,6 +28,7 @@ public class TaskShared {
     @JoinColumn(name = "task_id", nullable = false)
     private Task task;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -40,6 +42,10 @@ public class TaskShared {
         this.user = user;
         this.task = task;
         this.accessLevel = accessLevel;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public Task getTask() {
