@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.list.to_do.entities.ENUM.UserRole;
 
 import jakarta.persistence.Column;
@@ -124,6 +125,11 @@ public class User implements UserDetails {
 
     public List<Task> getTask() {
         return task;
+    }
+
+    @JsonIgnore
+    public String toString() {
+        return " id: " + getId();
     }
 
     @Override

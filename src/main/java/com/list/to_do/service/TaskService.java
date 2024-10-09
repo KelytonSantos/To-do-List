@@ -23,8 +23,13 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     public List<Task> getAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return taskRepository.findAll();
+        User user = (User) authentication.getPrincipal();
+
+        System.out.println(user.toString());
+
+        return taskRepository.findAllById(user.getId());
     }
 
     public Task createTask(TaskDTO data) {
