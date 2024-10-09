@@ -1,8 +1,6 @@
 package com.list.to_do.service;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<List<User>> findAllActive() {
-        return userRepository.findAllActive();
-    }
-
     public User findActiveById(UUID id) {
         return userRepository.findActiveById(id).orElseThrow(() -> new ResourceNotFound(id));
+    }
+
+    public User findActiveByEmail(String email) {
+        return userRepository.findActiveByEmail(email)
+                .orElseThrow(() -> new ResourceNotFound("Email not found " + email));
     }
 
     public User deleteById(UUID id) {

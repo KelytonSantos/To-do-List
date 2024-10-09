@@ -22,4 +22,15 @@ public class ResourceExceptionHandler {
 
         return ResponseEntity.status(statusCode).body(buildingError);
     }
+
+    @ExceptionHandler(ResourceAlreadyExist.class)
+    public ResponseEntity<StandardError> alreadyExist(ResourceAlreadyExist e, HttpServletRequest request) {
+        String error = "Resource Already Exist";
+        HttpStatus statusCode = HttpStatus.CONFLICT;
+
+        StandardError buildingError = new StandardError(Instant.now(), statusCode.value(), error, e.getMessage(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(statusCode).body(buildingError);
+    }
 }

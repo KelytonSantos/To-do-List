@@ -32,6 +32,10 @@ public class TaskService {
         return taskRepository.findAllById(user.getId());
     }
 
+    public Task getById(UUID id) {
+        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFound("Task not found " + id));
+    }
+
     public Task createTask(TaskDTO data) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
