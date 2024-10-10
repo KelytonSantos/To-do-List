@@ -71,6 +71,11 @@ public class TaskShared {
     public AccessLevel getAcessLevel() {
         return accessLevel;
     }
+
+    @JsonIgnore
+    public String toString() {
+        return "Acess Level " + getAcessLevel();
+    }
 }
 
 // tabela intermediaria de mutios pra muitos(user task)

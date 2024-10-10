@@ -81,10 +81,14 @@ public class TaskSharedService {
         TaskShared taskSharedToDelete = taskSharedRepository.findUserById(user.getId())
                 .orElseThrow(() -> new ResourceNotFound(user.getId()));
 
+        System.out.println();
+        System.out.println(taskSharedToDelete);
+        System.out.println();
+
         if (taskSharedToDelete.getAcessLevel() == AccessLevel.ADMIN) {
             taskSharedRepository.deleteById(taskId);
         } else {
-            new ResourceNotAllowed("Pode não man");
+            throw new ResourceNotAllowed("Pode não man");
         }
     }
 }
